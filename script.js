@@ -133,43 +133,43 @@ Forever yours,
 
 const memories = [
     {
-        image: "images/img1.jpeg",
+        image: "img1.jpeg",
         title: "The Beginning ❤️",
         date: "Where everything started",
         text: "The day we first talked... I never imagined that one conversation would become my favorite chapter."
     },
     {
-        image: "images/img2.jpeg",
+        image: "img2.jpeg",
         title: "First Smile 😊",
         date: "A Beautiful Memory",
         text: "Your smile became my favorite place. Every time you smiled, my whole day became brighter."
     },
     {
-        image: "images/img3.jpeg",
+        image: "img3.jpeg",
         title: "Our First Date 🌸",
         date: "One of My Happiest Days",
         text: "That day will always stay in my heart. Every little moment felt magical because you were beside me."
     },
     {
-        image: "images/img4.jpeg",
+        image: "img4.jpeg",
         title: "Our Crazy Moments 😂",
         date: "Laughing Together",
         text: "From silly jokes to endless laughs, every moment with you became a memory I never want to lose."
     },
     {
-        image: "images/img5.jpeg",
+        image: "img5.jpeg",
         title: "My Favorite Person ❤️",
         date: "Everyday Feels Special",
         text: "You make ordinary days feel extraordinary just by being there."
     },
     {
-        image: "images/img6.jpeg",
+        image: "img6.jpeg",
         title: "Beautiful Memories 📸",
         date: "Captured Forever",
         text: "Every picture reminds me that life became much more beautiful after you entered it."
     },
     {
-        image: "images/img7.jpeg",
+        image: "img7.jpeg",
         title: "Happy Birthday Khushi 🎂",
         date: "18 July ❤️",
         text: "Today is your special day. Thank you for being my happiness, my peace, and my favorite person."
@@ -710,7 +710,7 @@ function createFloatingPhotos() {
 
     for (let i = 1; i <= 7; i++) {
         const img = document.createElement("img");
-        img.src = `images/img${i}.jpeg`;
+        img.src = `img${i}.jpeg`;
         img.className = "floatPhoto";
         img.style.left = (10 + Math.random() * 70) + "vw";
         img.style.top = (15 + Math.random() * 55) + "vh";
