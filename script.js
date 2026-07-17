@@ -340,7 +340,17 @@ window.addEventListener("DOMContentLoaded", () => {
             try {
                 const img = new Image();
                 img.onload = () => resolve();
-                img.onerror = () => resolve();
+                img.onerror = () => {
+                    // Try alternative path (prepend images/)
+                    if (mem.image.indexOf('images/') === -1) {
+                        const altImg = new Image();
+                        altImg.onload = () => resolve();
+                        altImg.onerror = () => resolve();
+                        altImg.src = 'images/' + mem.image;
+                    } else {
+                        resolve();
+                    }
+                };
                 img.src = mem.image;
             } catch (e) {
                 resolve();
@@ -489,6 +499,15 @@ function openScrapbook() {
             SCRAPBOOK MEMORIES
 ========================================== */
 function loadMemory(index) {
+    const applyImageSource = () => {
+        memoryImage.src = memories[index].image;
+        memoryImage.onerror = () => {
+            if (memoryImage.src.indexOf('/images/') === -1) {
+                memoryImage.src = 'images/' + memories[index].image;
+            }
+        };
+    };
+
     if (typeof gsap !== "undefined") {
         // Advanced slide-and-fade for premium memory transitions
         gsap.timeline()
@@ -499,7 +518,7 @@ function loadMemory(index) {
                 ease: "power2.in"
             })
             .call(() => {
-                memoryImage.src = memories[index].image;
+                applyImageSource();
                 memoryTitle.innerHTML = memories[index].title;
                 memoryDate.innerHTML = memories[index].date;
                 memoryDescription.innerHTML = memories[index].text;
@@ -510,7 +529,7 @@ function loadMemory(index) {
             );
     } else {
         // Fallback
-        memoryImage.src = memories[index].image;
+        applyImageSource();
         memoryTitle.innerHTML = memories[index].title;
         memoryDate.innerHTML = memories[index].date;
         memoryDescription.innerHTML = memories[index].text;
@@ -710,7 +729,13 @@ function createFloatingPhotos() {
 
     for (let i = 1; i <= 7; i++) {
         const img = document.createElement("img");
-        img.src = `img${i}.jpeg`;
+        const filename = `img${i}.jpeg`;
+        img.src = filename;
+        img.onerror = () => {
+            if (img.src.indexOf('images/') === -1) {
+                img.src = 'images/' + filename;
+            }
+        };
         img.className = "floatPhoto";
         img.style.left = (10 + Math.random() * 70) + "vw";
         img.style.top = (15 + Math.random() * 55) + "vh";
@@ -760,6 +785,16 @@ function grandFinale() {
         }, 100);
     }
     if (video) {
+        const source = video.querySelector("source");
+        if (source) {
+            source.onerror = () => {
+                if (source.src.indexOf('images/') === -1) {
+                    source.src = 'images/vid1.mp4';
+                    video.load();
+                    video.play().catch(e => console.log("Video fail fallback", e));
+                }
+            };
+        }
         video.play().catch(err => {
             console.log("Autoplay blocked, user can click play control", err);
         });
