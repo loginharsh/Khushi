@@ -1,0 +1,1562 @@
+/* ==========================================
+            DESIGN SYSTEM & FONTS
+========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@400;700&family=Dancing+Script:wght@700&family=Great+Vibes&display=swap');
+
+:root {
+    --primary: #d81b60;
+    --primary-glow: rgba(216, 27, 96, 0.4);
+    --secondary: #ff4d6d;
+    --secondary-glow: rgba(255, 77, 109, 0.3);
+    --accent: #ffb703;
+    --bg-gradient: linear-gradient(135deg, #fbc4db, #f7a6c7, #e895b9, #f9b5d0, #fcd3e4);
+    --text-dark: #3a222b;
+    --text-light: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.25);
+    --glass-shadow: 0 15px 45px rgba(216, 27, 96, 0.1);
+    --shadow-soft: 0 20px 50px rgba(0, 0, 0, 0.08);
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Poppins', sans-serif;
+    --font-handwriting: 'Caveat', cursive;
+    --font-script: 'Great Vibes', cursive;
+}
+
+/* ==========================================
+            RESET & BASE STYLES
+========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-body);
+    background: #fbc4db;
+    color: var(--text-dark);
+    cursor: none; /* Hide standard cursor for the custom cursor effect */
+    position: relative;
+    user-select: none;
+}
+
+/* ==========================================
+            GLOBAL LAYOUTS & SECTIONS
+========================================== */
+section {
+    width: 100%;
+    min-height: 100vh;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Ambient Background Blobs */
+#gradientBackground {
+    position: fixed;
+    inset: 0;
+    z-index: -20;
+    background: var(--bg-gradient);
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Background Effects Container */
+#heart-container, #petals, #butterflies, #sparkles, #stars, #fireflies {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -10;
+    overflow: hidden;
+}
+
+/* Custom Floating Elements styling */
+.falling-heart {
+    position: absolute;
+    top: -50px;
+    animation: heartFall linear forwards;
+    filter: drop-shadow(0 4px 6px rgba(216, 27, 96, 0.2));
+}
+
+@keyframes heartFall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+.petal {
+    position: absolute;
+    top: -50px;
+    animation: petalFall linear forwards;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+}
+
+@keyframes petalFall {
+    0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
+    10% { opacity: 0.9; }
+    100% { transform: translateY(110vh) rotate(720deg) translateX(80px); opacity: 0; }
+}
+
+.butterfly {
+    position: absolute;
+    font-size: 28px;
+    animation: butterflyFly linear infinite;
+    filter: drop-shadow(0 4px 10px rgba(255, 255, 255, 0.8));
+    will-change: transform;
+}
+
+@keyframes butterflyFly {
+    0% { transform: translate(-100px, 100vh) rotate(0deg) scale(0.8); }
+    50% { transform: translate(50vw, 20vh) rotate(15deg) scale(1.1); }
+    100% { transform: translate(110vw, -10vh) rotate(-10deg) scale(0.8); }
+}
+
+/* Ambient Sparkles */
+.sparkle {
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 0 10px white, 0 0 20px rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    will-change: transform, opacity;
+}
+
+/* Background Clouds */
+.cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.25);
+    filter: blur(25px);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -15;
+}
+.cloud1 { width: 400px; height: 150px; top: 10%; left: -450px; animation: cloudMoveRight 60s linear infinite; }
+.cloud2 { width: 300px; height: 120px; top: 30%; right: -350px; animation: cloudMoveLeft 70s linear infinite; }
+.cloud3 { width: 500px; height: 180px; bottom: 10%; left: -550px; animation: cloudMoveRight 80s linear infinite; }
+
+@keyframes cloudMoveRight {
+    to { transform: translateX(calc(100vw + 600px)); }
+}
+@keyframes cloudMoveLeft {
+    to { transform: translateX(calc(-100vw - 400px)); }
+}
+
+/* ==========================================
+            CUSTOM PREMIUM CURSOR
+========================================== */
+#cursor {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 999999;
+    box-shadow: 0 0 10px var(--primary), 0 0 20px var(--secondary);
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+#cursorFollower {
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--primary);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 999998;
+    transition: transform 0.08s ease-out, border-color 0.2s, width 0.2s, height 0.2s;
+}
+
+#cursorGlow {
+    position: fixed;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(216, 27, 96, 0.15) 0%, rgba(216, 27, 96, 0.02) 60%, transparent 100%);
+    transform: translate(-50%, -50%);
+    z-index: -2;
+    filter: blur(15px);
+}
+
+.cursor-heart {
+    position: fixed;
+    color: var(--secondary);
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 999997;
+    animation: cursorHeartAnim 1s ease-out forwards;
+}
+
+@keyframes cursorHeartAnim {
+    0% { transform: translate(-50%, -50%) scale(1) translateY(0); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(0.2) translateY(-80px) rotate(30deg); opacity: 0; }
+}
+
+/* ==========================================
+            TYPOGRAPHY & GLOBAL CONTROLS
+========================================== */
+h1, h2, h3 {
+    text-shadow: 0 4px 10px rgba(216, 27, 96, 0.15);
+    text-align: center;
+}
+
+h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-family: var(--font-body);
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+    font-weight: 400;
+    color: var(--primary);
+}
+
+/* Premium Buttons */
+button {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: 0.5px;
+    padding: 14px 36px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 10px 25px var(--primary-glow);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    outline: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    will-change: transform;
+}
+
+button:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 15px 30px var(--primary-glow), 0 0 15px rgba(255, 77, 109, 0.3);
+}
+
+button:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+/* ==========================================
+            INTRO & LOADING SCREENS
+========================================== */
+
+/* 1. Loader screen */
+#loading {
+    background: #09060d;
+    z-index: 10000;
+}
+
+.loaderContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 90px;
+    animation: heartbeat 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+    filter: drop-shadow(0 0 20px var(--primary));
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.15); }
+    40% { transform: scale(1.05); }
+    60% { transform: scale(1.15); }
+}
+
+#loading h2 {
+    color: white;
+    font-family: var(--font-heading);
+    letter-spacing: 1px;
+}
+
+.loadingBar {
+    width: 320px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#loadingProgress {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--secondary), var(--primary), var(--accent));
+    border-radius: 10px;
+    box-shadow: 0 0 12px var(--primary);
+    transition: width 0.1s linear;
+}
+
+#loadingPercent {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* 2. Netflix cinematic intro */
+#netflixIntro {
+    background: #09060d;
+    z-index: 9000;
+}
+
+.redLine {
+    width: 0;
+    height: 4px;
+    background: var(--primary);
+    box-shadow: 0 0 25px var(--primary), 0 0 10px var(--primary);
+    border-radius: 5px;
+    animation: redLineSpread 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes redLineSpread {
+    to { width: 65%; }
+}
+
+#netflixIntro h1 {
+    font-family: var(--font-heading);
+    color: white;
+    margin-top: 35px;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    letter-spacing: 12px;
+    text-transform: uppercase;
+    font-weight: 800;
+    opacity: 0;
+    filter: blur(10px);
+    animation: textCinematic 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    animation-delay: 1.2s;
+}
+
+#netflixIntro h2 {
+    color: var(--secondary);
+    font-family: var(--font-handwriting);
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-top: 15px;
+    opacity: 0;
+    filter: blur(5px);
+    animation: textCinematic 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    animation-delay: 2.2s;
+}
+
+@keyframes textCinematic {
+    to { opacity: 1; filter: blur(0); }
+}
+
+/* 3. Dream Intro */
+#intro {
+    background: radial-gradient(circle at center, #1b0a1a 0%, #09060d 100%);
+    text-align: center;
+    color: white;
+}
+
+.introHeart {
+    font-size: 110px;
+    filter: drop-shadow(0 0 25px var(--primary));
+    animation: heartbeat 1.4s infinite cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+#introTyping {
+    margin-top: 40px;
+    min-height: 80px;
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    font-weight: 500;
+    color: white;
+    padding: 0 20px;
+}
+
+#intro p {
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+/* ==========================================
+            STORYBOOK COVER
+========================================== */
+#bookCover {
+    perspective: 1500px;
+}
+
+.book3D {
+    width: min(440px, 90vw);
+    height: min(600px, 80vh);
+    position: relative;
+    transform-style: preserve-3d;
+    animation: bookFloat 6s ease-in-out infinite;
+    will-change: transform;
+}
+
+@keyframes bookFloat {
+    0%, 100% { transform: translateY(0) rotateX(4deg) rotateY(-4deg); }
+    50% { transform: translateY(-20px) rotateX(8deg) rotateY(4deg); }
+}
+
+.cover {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #a81c4e 0%, #700f32 100%);
+    border-radius: 16px 24px 24px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.35), inset -10px 0 30px rgba(0,0,0,0.2), inset 5px 0 10px rgba(255,255,255,0.1);
+    border: 8px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+/* Spine effect */
+.cover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 35px;
+    background: linear-gradient(to right, rgba(0,0,0,0.3) 0%, rgba(255,255,255,0.06) 40%, rgba(0,0,0,0.1) 85%, transparent 100%);
+    border-radius: 10px 0 0 10px;
+    transform: translateZ(1px);
+}
+
+.cover h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    color: white;
+    margin-bottom: 10px;
+    font-weight: 700;
+    transform: translateZ(30px);
+}
+
+.cover h3 {
+    margin-top: 30px;
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.6);
+    transform: translateZ(20px);
+}
+
+.cover h2 {
+    margin-top: 10px;
+    font-family: var(--font-script);
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    color: var(--accent);
+    transform: translateZ(40px);
+}
+
+#openBook {
+    margin-top: 50px;
+    background: white;
+    color: var(--primary);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    transform: translateZ(30px);
+}
+
+#openBook:hover {
+    background: var(--accent);
+    color: #4b0d25;
+    transform: translateZ(50px) scale(1.05);
+}
+
+/* ==========================================
+            STORY PAGES
+========================================== */
+#storyPage {
+    padding: 30px 20px;
+}
+
+.paper {
+    width: min(850px, 95vw);
+    min-height: 580px;
+    background: #fffdf5;
+    color: var(--text-dark);
+    border-radius: 16px;
+    padding: clamp(30px, 6vw, 60px);
+    box-shadow: 0 25px 65px rgba(216, 27, 96, 0.15), inset 0 0 80px rgba(0,0,0,0.02);
+    position: relative;
+    border: 1px solid rgba(216, 27, 96, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.4s ease;
+}
+
+/* Notebook lines effect */
+.paper::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    background: repeating-linear-gradient(transparent, transparent 39px, rgba(216, 27, 96, 0.04) 40px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Decorative spine holes */
+.paper::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 40px;
+    bottom: 40px;
+    width: 2px;
+    border-left: 2px dashed rgba(216, 27, 96, 0.15);
+    pointer-events: none;
+}
+
+.paper h1 {
+    color: var(--primary);
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    margin-bottom: 25px;
+    z-index: 2;
+}
+
+#storyText {
+    font-family: var(--font-handwriting);
+    font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+    line-height: 40px;
+    color: #4a3b40;
+    min-height: 280px;
+    padding: 0 10px 0 20px;
+    z-index: 2;
+    overflow-y: auto;
+}
+
+#nextToLetter {
+    margin: 40px auto 0;
+    z-index: 2;
+}
+
+/* ==========================================
+            LOVE LETTER & ENVELOPE
+========================================== */
+#letterPage {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+}
+
+.letterScene {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.letterScene h1 {
+    margin-bottom: 40px;
+    color: var(--text-dark);
+}
+
+.envelope {
+    position: relative;
+    width: min(440px, 90vw);
+    height: 280px;
+    cursor: pointer;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.envelope-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #ff85a2;
+    border-radius: 8px;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+    z-index: 10;
+}
+
+.envelope-flap {
+    position: absolute;
+    width: 100%;
+    height: 142px;
+    background: #ff6384;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 25;
+}
+
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 5;
+}
+
+/* Sliding paper inside */
+.letter-paper {
+    position: absolute;
+    width: 90%;
+    height: 320px;
+    left: 5%;
+    bottom: 10px;
+    background: #fffffb;
+    border-radius: 8px;
+    padding: 25px;
+    color: var(--text-dark);
+    transform: translateY(0);
+    transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    z-index: 15;
+}
+
+.envelope.open .letter-paper {
+    transform: translateY(-160px);
+}
+
+.letter-paper h2 {
+    color: var(--primary);
+    font-family: var(--font-script);
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    margin-bottom: 20px;
+}
+
+#letterContent {
+    font-family: var(--font-handwriting);
+    font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+    line-height: 34px;
+    color: #4a3b40;
+}
+
+#openLetterBtn {
+    margin-top: 50px;
+}
+
+/* ==========================================
+            MEMORY SCRAPBOOK
+========================================== */
+#scrapbookPage {
+    padding: 30px 20px;
+}
+
+.scrapbook {
+    width: min(1080px, 95vw);
+    min-height: 560px;
+    display: flex;
+    background: #fffaef;
+    color: var(--text-dark);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(216, 27, 96, 0.15);
+    border: 1px solid rgba(216, 27, 96, 0.05);
+}
+
+.scrapbook-left {
+    width: 50%;
+    position: relative;
+    background: #fff6e4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.scrapbook-right {
+    width: 50%;
+    padding: clamp(30px, 5vw, 60px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 1px dashed rgba(216, 27, 96, 0.1);
+    background: #fffaef;
+}
+
+#memoryImage {
+    width: 90%;
+    max-width: 360px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 14px solid white;
+    transform: rotate(-3deg);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+    will-change: transform, opacity;
+}
+
+#memoryImage:hover {
+    transform: rotate(0deg) scale(1.05);
+}
+
+#memoryTitle {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    color: var(--primary);
+    text-align: left;
+    margin-bottom: 12px;
+    transition: opacity 0.3s ease;
+}
+
+#memoryDate {
+    font-family: var(--font-body);
+    color: var(--secondary);
+    font-weight: 600;
+    margin-bottom: 25px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+#memoryDescription {
+    color: #4e4045;
+    line-height: 32px;
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    transition: opacity 0.3s ease;
+}
+
+.memoryControls {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.memoryControls button {
+    padding: 12px 28px;
+    background: var(--primary);
+}
+
+.memoryControls button:hover {
+    background: var(--secondary);
+}
+
+/* Stickers & Deco */
+.tape {
+    position: absolute;
+    width: 100px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    z-index: 5;
+}
+
+.tape1 { top: 30px; left: 50px; transform: rotate(-25deg); }
+.tape2 { bottom: 30px; right: 50px; transform: rotate(20deg); }
+
+.heartSticker {
+    position: absolute;
+    bottom: 35px;
+    left: 45px;
+    font-size: 36px;
+    animation: heartbeat 1.5s infinite;
+    filter: drop-shadow(0 3px 5px rgba(0,0,0,0.1));
+}
+
+.flower {
+    position: absolute;
+    font-size: 32px;
+}
+
+.flower1 {
+    top: 30px;
+    right: 40px;
+    animation: float 4s ease-in-out infinite;
+}
+
+/* ==========================================
+            LOVE TIMELINE
+========================================== */
+#timelinePage {
+    padding: 50px 20px;
+}
+
+.timeline {
+    width: min(1080px, 95vw);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    margin-top: 80px;
+}
+
+/* Desktop Connecting Line */
+.timeline::before {
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: 5%;
+    width: 90%;
+    height: 4px;
+    background: linear-gradient(to right, var(--secondary), var(--primary), var(--accent));
+    border-radius: 10px;
+    z-index: 0;
+}
+
+.timeline-item {
+    width: 170px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+    will-change: transform;
+}
+
+.timeline-item:hover {
+    transform: translateY(-12px);
+}
+
+.timeline-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    box-shadow: 0 10px 25px rgba(216, 27, 96, 0.15);
+    border: 3px solid #fffaef;
+}
+
+.timeline-item h3 {
+    margin-top: 20px;
+    color: var(--text-dark);
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+}
+
+.timeline-item p {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: rgba(58, 34, 43, 0.75);
+    line-height: 20px;
+}
+
+#timelineNext {
+    margin-top: 60px;
+}
+
+/* ==========================================
+            BIRTHDAY CELEBRATION
+========================================== */
+#birthdayPage {
+    background: radial-gradient(circle at center, #1b0a1a 0%, #09060d 100%);
+    color: white;
+}
+
+#birthdayPage h1 {
+    color: white;
+    text-shadow: 0 0 25px var(--primary);
+}
+
+.birthdayText {
+    margin: 20px auto 40px;
+    width: min(600px, 90vw);
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 28px;
+}
+
+.cakeContainer {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.cake {
+    position: relative;
+    width: 260px;
+}
+
+.cake-bottom {
+    width: 260px;
+    height: 80px;
+    background: #ff5c8a;
+    border-radius: 12px 12px 16px 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.cake-middle {
+    width: 200px;
+    height: 70px;
+    background: #ff7597;
+    margin: -8px auto 0;
+    border-radius: 10px;
+}
+
+.cake-top {
+    width: 140px;
+    height: 55px;
+    background: #ff94b1;
+    margin: -8px auto 0;
+    border-radius: 8px;
+}
+
+.candles {
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    z-index: 10;
+}
+
+.candle {
+    width: 10px;
+    height: 42px;
+    background: repeating-linear-gradient(45deg, white, white 5px, var(--accent) 5px, var(--accent) 10px);
+    position: relative;
+    border-radius: 2px 2px 0 0;
+}
+
+.flame {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 20px;
+    background: radial-gradient(circle at bottom, #ffbe0b, #ff006e);
+    border-radius: 50% 50% 20% 20%;
+    animation: flicker 0.4s infinite alternate;
+    box-shadow: 0 0 15px gold, 0 0 30px orange;
+    will-change: transform, opacity;
+}
+
+@keyframes flicker {
+    from { transform: translateX(-50%) scale(1) rotate(-1deg); }
+    to { transform: translateX(-50%) scale(0.85) rotate(1deg); }
+}
+
+#blowCandles {
+    margin-top: 50px;
+}
+
+/* Confetti styling */
+#confettiContainer {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.confetti {
+    position: absolute;
+    will-change: transform, opacity;
+    animation: confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+    0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* ==========================================
+            GIFT SURPRISE
+========================================== */
+#giftPage {
+    background: radial-gradient(circle at center, #1b0a1a 0%, #09060d 100%);
+    color: white;
+}
+
+.giftScene {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.giftScene h1 {
+    color: white;
+}
+
+#giftBox {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    cursor: pointer;
+    margin-top: 60px;
+    animation: giftWiggle 3s ease-in-out infinite;
+    will-change: transform;
+}
+
+@keyframes giftWiggle {
+    0%, 100% { transform: rotate(0deg); }
+    5%, 15% { transform: rotate(-5deg); }
+    10%, 20% { transform: rotate(5deg); }
+    25% { transform: rotate(0deg); }
+}
+
+.gift-body {
+    position: absolute;
+    bottom: 0;
+    width: 200px;
+    height: 140px;
+    background: var(--secondary);
+    border-radius: 8px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+.gift-lid {
+    position: absolute;
+    top: 45px;
+    width: 208px;
+    left: -4px;
+    height: 40px;
+    background: var(--primary);
+    border-radius: 6px;
+    z-index: 10;
+    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+#giftBox.open .gift-lid {
+    transform: translateY(-80px) rotate(-15deg);
+}
+
+.gift-ribbon-v, .gift-ribbon-h {
+    background: var(--accent);
+    position: absolute;
+}
+
+.gift-ribbon-v {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 100%;
+}
+
+.gift-ribbon-h {
+    top: 55px;
+    width: 100%;
+    height: 24px;
+    z-index: 2;
+}
+
+#giftMessage {
+    margin-top: 40px;
+    font-size: 1.8rem;
+    font-family: var(--font-script);
+    color: var(--accent);
+}
+
+/* ==========================================
+            NIGHT SKY
+========================================== */
+#nightPage {
+    background: linear-gradient(180deg, #06050b 0%, #0d0c1e 40%, #16112a 100%);
+    overflow: hidden;
+}
+
+.nightTitle {
+    color: white;
+    font-size: clamp(2rem, 5vw, 4rem);
+    text-shadow: 0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(13, 204, 255, 0.3);
+}
+
+#nightPage h2 {
+    font-family: var(--font-script);
+    font-size: clamp(3rem, 6vw, 5rem);
+    color: #ffc4df;
+    margin-top: 10px;
+}
+
+.moonGlow {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    top: 80px;
+    right: 80px;
+    background: #fffff0;
+    box-shadow: 0 0 35px #ffffff, 0 0 75px rgba(255, 255, 255, 0.8), 0 0 150px rgba(255, 255, 255, 0.3);
+    z-index: 0;
+}
+
+#nightStars {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.15; transform: scale(0.7); }
+    100% { opacity: 1; transform: scale(1.4); }
+}
+
+#shootingStar {
+    position: absolute;
+    width: 150px;
+    height: 2px;
+    background: linear-gradient(to right, white, transparent);
+    transform: rotate(-30deg);
+    top: 15%;
+    left: -200px;
+    animation: shooting 10s linear infinite;
+    z-index: 1;
+}
+
+@keyframes shooting {
+    0% { left: -200px; top: 15%; opacity: 0; }
+    5% { opacity: 1; }
+    15% { left: 100vw; top: 60%; opacity: 0; }
+    100% { left: 100vw; top: 60%; opacity: 0; }
+}
+
+.firefly {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #e2f95c;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #e2f95c, 0 0 20px #e2f95c;
+    animation: fireflyMove 8s ease-in-out infinite;
+    will-change: transform;
+}
+
+@keyframes fireflyMove {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(40px, -50px); }
+    50% { transform: translate(-30px, -90px); }
+    75% { transform: translate(50px, -20px); }
+}
+
+/* ==========================================
+            FINAL LETTER & SECRET PAGE
+========================================== */
+#finalMessage {
+    background: radial-gradient(circle at center, #1b0a1a 0%, #09060d 100%);
+    padding: 20px;
+}
+
+.glassCard {
+    width: min(800px, 95vw);
+    padding: clamp(30px, 6vw, 60px);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 30px 70px rgba(0,0,0,0.3);
+}
+
+.glassCard h1 {
+    color: white;
+    font-family: var(--font-heading);
+}
+
+#finalLetter {
+    font-family: var(--font-handwriting);
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    line-height: 42px;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    min-height: 200px;
+}
+
+#secretPage {
+    background: radial-gradient(circle at center, #1b0a1a 0%, #09060d 100%);
+}
+
+#secretButton {
+    z-index: 100;
+}
+
+#floatingPhotos {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.floatPhoto {
+    position: absolute;
+    width: min(180px, 40vw);
+    border: 8px solid white;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    animation: photoFloat 8s ease-in-out infinite;
+    will-change: transform;
+}
+
+@keyframes photoFloat {
+    0%, 100% { transform: translateY(0) rotate(-6deg); }
+    50% { transform: translateY(-15px) rotate(4deg); }
+}
+
+/* ==========================================
+            WIDGETS & HUD
+========================================== */
+
+/* 1. Love Meter */
+#loveMeter {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 160px;
+    padding: 12px 16px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: var(--glass-shadow);
+    z-index: 999;
+}
+
+#loveMeter span {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+    text-align: center;
+}
+
+.meter {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#meterFill {
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, var(--secondary), var(--primary));
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+#lovePercent {
+    margin-top: 6px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--primary);
+}
+
+/* 2. Scroll Indicator */
+#scrollIndicator {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.75;
+    z-index: 100;
+    pointer-events: none;
+    color: var(--text-dark);
+}
+
+#scrollIndicator span {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.mouse {
+    width: 22px;
+    height: 38px;
+    border: 2px solid var(--text-dark);
+    border-radius: 12px;
+    position: relative;
+}
+
+.wheel {
+    width: 4px;
+    height: 8px;
+    background: var(--text-dark);
+    border-radius: 2px;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scrollWheelAnim 1.6s infinite;
+}
+
+@keyframes scrollWheelAnim {
+    0% { transform: translate(-50%, 0); opacity: 1; }
+    100% { transform: translate(-50%, 12px); opacity: 0; }
+}
+
+/* 3. Audio & Scroll back controls */
+#musicToggle {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    font-size: 1.2rem;
+    z-index: 999;
+    padding: 0;
+}
+
+#backTop {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: 0 8px 20px var(--primary-glow);
+    font-size: 1.3rem;
+    z-index: 999;
+    display: none;
+    padding: 0;
+}
+
+/* ==========================================
+            PAGE TRANSITION OVERLAYS
+========================================== */
+#pageTransition {
+    position: fixed;
+    inset: 0;
+    background: white;
+    z-index: 999999;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    pointer-events: none;
+}
+
+.pageOpen { animation: pageOpenAnim 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
+.pageClose { animation: pageCloseAnim 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
+
+@keyframes pageOpenAnim {
+    from { transform: scaleY(1); transform-origin: top; }
+    to { transform: scaleY(0); transform-origin: top; }
+}
+
+@keyframes pageCloseAnim {
+    from { transform: scaleY(0); transform-origin: bottom; }
+    to { transform: scaleY(1); transform-origin: bottom; }
+}
+
+/* ==========================================
+            FOOTER
+========================================== */
+footer {
+    position: fixed;
+    bottom: 12px;
+    width: 100%;
+    text-align: center;
+    color: var(--text-dark);
+    font-size: 0.8rem;
+    font-weight: 500;
+    opacity: 0.6;
+    z-index: 99;
+    pointer-events: none;
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================
+            RESPONSIVE DESIGNS
+========================================== */
+@media (max-width: 1024px) {
+    /* Scrapbook Notebook Layout Adjustments */
+    .scrapbook {
+        flex-direction: column;
+        min-height: auto;
+    }
+    
+    .scrapbook-left, .scrapbook-right {
+        width: 100%;
+    }
+
+    .scrapbook-right {
+        border-left: none;
+        border-top: 1px dashed rgba(216, 27, 96, 0.1);
+        padding: 40px 30px;
+    }
+
+    #memoryImage {
+        width: 80%;
+    }
+
+    /* Timeline adjustments */
+    .timeline {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        margin-top: 40px;
+    }
+
+    .timeline::before {
+        left: 50%;
+        top: 0;
+        width: 4px;
+        height: 100%;
+        transform: translateX(-50%);
+    }
+
+    .timeline-item {
+        width: 100%;
+        max-width: 280px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        cursor: auto; /* Show default cursor on mobile */
+    }
+
+    #cursor, #cursorFollower, #cursorGlow {
+        display: none !important;
+    }
+
+    /* Paper size */
+    .paper {
+        min-height: auto;
+        padding: 30px 20px;
+    }
+
+    /* 3D Book Cover Mobile size */
+    .book3D {
+        width: 290px;
+        height: 410px;
+    }
+
+    .cover h1 {
+        font-size: 2rem;
+    }
+
+    #openBook {
+        margin-top: 35px;
+        padding: 12px 28px;
+    }
+
+    .envelope {
+        width: 320px;
+        height: 220px;
+    }
+
+    .envelope.open .letter-paper {
+        transform: translateY(-110px);
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.1rem;
+    }
+
+    #loveMeter {
+        width: 130px;
+        top: 10px;
+        right: 10px;
+        padding: 8px 10px;
+    }
+
+    #loveMeter span {
+        font-size: 0.75rem;
+    }
+
+    #lovePercent {
+        font-size: 0.8rem;
+    }
+}
+
+/* ==========================================
+            SURPRISE VIDEO PLAYER
+========================================== */
+#videoContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.85);
+    width: min(560px, 85vw);
+    max-height: 60vh;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 30px var(--primary-glow);
+    padding: 8px;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#videoContainer.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+}
+
+#surpriseVideo {
+    width: 100%;
+    max-height: 58vh;
+    border-radius: 14px;
+    display: block;
+    object-fit: contain;
+    outline: none;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}

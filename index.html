@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Khushi ❤️</title>
+    
+    <!-- Preconnect & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@400;700&family=Dancing+Script:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <script>
+        window.onerror = function(message, source, lineno, colno, error) {
+            var div = document.createElement('div');
+            div.style.position = 'fixed';
+            div.style.top = '10px';
+            div.style.left = '10px';
+            div.style.right = '10px';
+            div.style.background = 'rgba(230, 40, 90, 0.95)';
+            div.style.color = 'white';
+            div.style.padding = '20px';
+            div.style.zIndex = '9999999';
+            div.style.fontFamily = 'monospace';
+            div.style.fontSize = '14px';
+            div.style.borderRadius = '8px';
+            div.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
+            div.style.whiteSpace = 'pre-wrap';
+            div.innerHTML = '<strong>JS Error:</strong> ' + message + '<br>at ' + source + ' (line ' + lineno + ', col ' + colno + ')';
+            document.body.appendChild(div);
+            return false;
+        };
+    </script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ========================================= -->
+    <!-- BACKGROUND EFFECTS -->
+    <!-- ========================================= -->
+    <div id="gradientBackground"></div>
+    <div id="heart-container"></div>
+    <div id="petals"></div>
+    <div id="butterflies"></div>
+    <div id="sparkles"></div>
+    <div id="stars"></div>
+    <div id="fireflies"></div>
+    
+    <!-- Background Clouds -->
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
+
+    <!-- ========================================= -->
+    <!-- LOADER -->
+    <!-- ========================================= -->
+    <section id="loading">
+        <div class="loaderContent">
+            <h1 class="logo">❤️</h1>
+            <h2>Loading Memories...</h2>
+            <div class="loadingBar">
+                <div id="loadingProgress"></div>
+            </div>
+            <p id="loadingPercent">0%</p>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- NETFLIX INTRO -->
+    <!-- ========================================= -->
+    <section id="netflixIntro" class="hidden">
+        <div class="redLine"></div>
+        <h1>THE STORY OF US</h1>
+        <h2>Harsh ❤️ Khushi</h2>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- DREAM INTRO -->
+    <!-- ========================================= -->
+    <section id="intro" class="hidden">
+        <div class="introHeart">❤️</div>
+        <h2 id="introTyping"></h2>
+        <p>Every Love Story Has A Beginning...</p>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- STORYBOOK COVER -->
+    <!-- ========================================= -->
+    <section id="bookCover" class="hidden">
+        <div class="book3D">
+            <div class="cover">
+                <h1>The Story Of Us</h1>
+                <h3>Written By</h3>
+                <h2>Harsh ❤️</h2>
+                <button id="openBook">Open The Book 📖</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- STORY PAGE -->
+    <!-- ========================================= -->
+    <section id="storyPage" class="hidden">
+        <div class="paper">
+            <h1>Chapter One</h1>
+            <div id="storyText"></div>
+            <button id="nextToLetter">Continue ❤️</button>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- LOVE LETTER -->
+    <!-- ========================================= -->
+    <section id="letterPage" class="hidden">
+        <div class="letterScene">
+            <h1>For My Beautiful Billi ❤️</h1>
+            <div class="envelope" id="envelope">
+                <div class="envelope-back"></div>
+                <div class="envelope-flap"></div>
+                <div class="letter-paper">
+                    <h2>Dear Khushi ❤️</h2>
+                    <div id="letterContent"></div>
+                </div>
+            </div>
+            <button id="openLetterBtn">Open My Heart 💌</button>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- MEMORY SCRAPBOOK -->
+    <!-- ========================================= -->
+    <section id="scrapbookPage" class="hidden">
+        <h1 class="sectionTitle">Our Beautiful Memories ❤️</h1>
+        <div class="scrapbook">
+            <div class="scrapbook-left">
+                <div class="tape tape1"></div>
+                <div class="tape tape2"></div>
+                <img id="memoryImage" src="images/img1.jpeg" alt="Memory">
+                <div class="flower flower1">🌸</div>
+                <div class="heartSticker">❤️</div>
+            </div>
+            <div class="scrapbook-right">
+                <h2 id="memoryTitle">Our First Memory</h2>
+                <p id="memoryDate">18 July ❤️</p>
+                <div id="memoryDescription"></div>
+            </div>
+        </div>
+        <div class="memoryControls">
+            <button id="prevMemory">⬅ Previous</button>
+            <button id="nextMemory">Next ➜</button>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- LOVE TIMELINE -->
+    <!-- ========================================= -->
+    <section id="timelinePage" class="hidden">
+        <h1>Our Journey Together ❤️</h1>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-icon">💬</div>
+                <h3>First Chat</h3>
+                <p>Where everything started.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-icon">📞</div>
+                <h3>First Call</h3>
+                <p>Hours felt like minutes.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-icon">☕</div>
+                <h3>First Date</h3>
+                <p>My favorite day.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-icon">📸</div>
+                <h3>Beautiful Memories</h3>
+                <p>Every picture tells our story.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-icon">🎂</div>
+                <h3>Your Birthday</h3>
+                <p>The day my favorite person was born.</p>
+            </div>
+        </div>
+        <button id="timelineNext">Continue ❤️</button>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- BIRTHDAY CELEBRATION -->
+    <!-- ========================================= -->
+    <section id="birthdayPage" class="hidden">
+        <div class="birthdayContainer">
+            <h1>🎂 Happy Birthday My Beautiful Khushi ❤️</h1>
+            <p class="birthdayText">
+                Today is not just your birthday...
+                It's the day the world received its most beautiful smile.
+            </p>
+            <div class="cakeContainer">
+                <div class="cake">
+                    <div class="cake-top"></div>
+                    <div class="cake-middle"></div>
+                    <div class="cake-bottom"></div>
+                    <div class="candles">
+                        <div class="candle"><div class="flame"></div></div>
+                        <div class="candle"><div class="flame"></div></div>
+                        <div class="candle"><div class="flame"></div></div>
+                    </div>
+                </div>
+            </div>
+            <button id="blowCandles">Make A Wish ❤️</button>
+        </div>
+    </section>
+
+    <!-- Confetti Overlay Container -->
+    <div id="confettiContainer"></div>
+
+    <!-- ========================================= -->
+    <!-- GIFT -->
+    <!-- ========================================= -->
+    <section id="giftPage" class="hidden">
+        <div class="giftScene">
+            <h1>One Last Surprise 🎁</h1>
+            <div id="giftBox">
+                <div class="gift-lid"></div>
+                <div class="gift-body"></div>
+                <div class="gift-ribbon-v"></div>
+                <div class="gift-ribbon-h"></div>
+            </div>
+            <p id="giftMessage">Click the gift ❤️</p>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- NIGHT SKY -->
+    <!-- ========================================= -->
+    <section id="nightPage" class="hidden">
+        <div class="moonGlow"></div>
+        <div id="nightStars"></div>
+        <div id="shootingStar"></div>
+        <div id="firefliesNight"></div>
+        <h1 class="nightTitle">Every Star Reminds Me Of You ✨</h1>
+        <h2>Harsh ❤️ Khushi</h2>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- FINAL MESSAGE -->
+    <!-- ========================================= -->
+    <section id="finalMessage" class="hidden">
+        <div class="glassCard">
+            <h1>Dear Khushi ❤️</h1>
+            <div id="finalLetter">Thank you for every smile...</div>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- SECRET SURPRISE -->
+    <!-- ========================================= -->
+    <section id="secretPage" class="hidden">
+        <button id="secretButton">❤️ One Last Surprise</button>
+        <div id="floatingPhotos"></div>
+        <div id="videoContainer" class="hidden">
+            <video id="surpriseVideo" loop playsinline controls>
+                <source src="images/vid1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- WIDGETS & HUD -->
+    <!-- ========================================= -->
+    <div id="loveMeter">
+        <span>❤️ Love Meter</span>
+        <div class="meter">
+            <div id="meterFill"></div>
+        </div>
+        <p id="lovePercent">0%</p>
+    </div>
+
+    <div id="scrollIndicator">
+        <span>Scroll</span>
+        <div class="mouse">
+            <div class="wheel"></div>
+        </div>
+    </div>
+
+    <!-- Background Music Toggle -->
+    <button id="musicToggle" class="hidden">🎵</button>
+
+    <!-- Back to Top Button -->
+    <button id="backTop">↑</button>
+
+    <!-- Custom Cursor Glow & Followers -->
+    <div id="cursor"></div>
+    <div id="cursorFollower"></div>
+    <div id="cursorGlow"></div>
+
+    <!-- Page transition overlay -->
+    <div id="pageTransition"></div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Made With ❤️ By Harsh</p>
+        <p>Happy Birthday My Beautiful Khushi ❤️</p>
+    </footer>
+
+    <!-- Background Music (Audio Element) -->
+    <audio id="bgMusic" loop>
+        <source src="music/song.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- ========================================= -->
+    <!-- SCRIPTS & LIBRARIES -->
+    <!-- ========================================= -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
